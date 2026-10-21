@@ -1,0 +1,116 @@
+{
+  "consumer": {
+    "name": "release-lab-dashboard"
+  },
+  "interactions": [
+    {
+      "description": "a request for the CI/CD dashboard overview",
+      "key": "e1fcc2ab",
+      "pending": false,
+      "providerStates": [
+        {
+          "name": "the dashboard can load its overview"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/api/overview"
+      },
+      "response": {
+        "body": {
+          "content": {
+            "checks": {
+              "contract": {
+                "result": "passing"
+              },
+              "unit": {
+                "result": "passing"
+              }
+            },
+            "deployment": {
+              "status": "idle",
+              "trafficPercent": 0
+            },
+            "pipeline": {
+              "status": "ready"
+            },
+            "service": "release-lab-api"
+          },
+          "contentType": "application/json",
+          "encoded": false
+        },
+        "headers": {
+          "Content-Type": [
+            "application/json"
+          ]
+        },
+        "matchingRules": {
+          "body": {
+            "$.checks.contract.result": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.checks.unit.result": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.deployment.status": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.deployment.trafficPercent": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ]
+            },
+            "$.pipeline.status": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.service": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      },
+      "transport": "http",
+      "type": "Synchronous/HTTP"
+    }
+  ],
+  "metadata": {
+    "pact-jvm": {
+      "version": "4.6.17"
+    },
+    "pactSpecification": {
+      "version": "4.0"
+    }
+  },
+  "provider": {
+    "name": "release-lab-api"
+  }
+}

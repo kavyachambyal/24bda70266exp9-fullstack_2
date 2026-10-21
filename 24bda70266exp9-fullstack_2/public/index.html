@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="description" content="A hands-on Continuous Integration and Delivery learning lab." />
+    <title>Release Lab — CI/CD learning environment</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#" aria-label="Release Lab home">
+          <span class="brand-mark"><span></span><span></span><span></span></span>
+          <span>release<span class="brand-light">lab</span></span>
+        </a>
+        <div class="workspace-label">WORKSPACE</div>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a class="nav-link active" href="#overview"><span class="nav-icon">⌂</span> Overview <span class="nav-indicator"></span></a>
+          <a class="nav-link" href="#pipeline"><span class="nav-icon">⟳</span> CI pipeline</a>
+          <a class="nav-link" href="#deployment"><span class="nav-icon">⇧</span> Deployments</a>
+          <a class="nav-link" href="#learn"><span class="nav-icon">▤</span> Experiment guide</a>
+        </nav>
+        <div class="sidebar-spacer"></div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-icon">✳</div>
+          <div class="sidebar-card-title">Learning by shipping</div>
+          <div class="sidebar-card-copy">Build confidence one green check at a time.</div>
+          <a href="#learn">Explore the guide <span>→</span></a>
+        </div>
+        <div class="profile">
+          <div class="avatar">RL</div>
+          <div><strong>Release Lab</strong><span>Student workspace</span></div>
+          <span class="profile-menu">···</span>
+        </div>
+      </aside>
+
+      <main id="overview" class="main-content">
+        <header class="topbar">
+          <div class="breadcrumb"><span>Workspace</span><span class="crumb-slash">/</span><strong>Overview</strong></div>
+          <div class="topbar-right"><span class="live-indicator"><i></i> All systems operational</span><span class="topbar-divider"></span><button class="help-button" aria-label="Help">?</button></div>
+        </header>
+
+        <div class="page-wrap">
+          <section class="welcome-row">
+            <div>
+              <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR DELIVERY WORKSPACE</div>
+              <h1>Ship with confidence<span>.</span></h1>
+              <p class="welcome-copy">Your hands-on lab for continuous integration and delivery.</p>
+            </div>
+            <button id="run-pipeline" class="button button-primary"><span class="play-icon">▶</span> Run pipeline</button>
+          </section>
+
+          <section class="stats-grid" aria-label="Project summary">
+            <article class="stat-card">
+              <div class="stat-top"><span class="stat-label">PIPELINE STATUS</span><span class="stat-icon icon-green">✓</span></div>
+              <div id="pipeline-status" class="stat-value">Ready to run</div>
+              <div id="pipeline-meta" class="stat-foot"><span class="status-dot status-gray"></span> Waiting for your first run</div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-top"><span class="stat-label">LATEST BUILD</span><span class="stat-icon icon-blue">↗</span></div>
+              <div id="build-number" class="stat-value"># —</div>
+              <div id="build-meta" class="stat-foot">No builds yet</div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-top"><span class="stat-label">TESTS PASSING</span><span class="stat-icon icon-violet">⌘</span></div>
+              <div class="stat-value">8 <span class="stat-subvalue">/ 8</span></div>
+              <div class="stat-foot"><span class="status-dot"></span> Unit, API &amp; contract</div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-top"><span class="stat-label">LIVE TRAFFIC</span><span class="stat-icon icon-orange">◉</span></div>
+              <div id="traffic-value" class="stat-value">0<span class="stat-unit">%</span></div>
+              <div id="traffic-meta" class="stat-foot"><span class="status-dot status-gray"></span> No active deployment</div>
+            </article>
+          </section>
+
+          <section id="pipeline" class="panel pipeline-panel">
+            <div class="panel-heading">
+              <div><div class="section-kicker">CONTINUOUS INTEGRATION</div><h2>Pipeline overview</h2><p>Every change goes through these automated quality gates.</p></div>
+              <span id="run-badge" class="run-badge">Awaiting first run</span>
+            </div>
+            <div class="pipeline-flow">
+              <article class="pipeline-step">
+                <div class="step-symbol symbol-commit">↥</div><div class="step-title">Code push</div><div class="step-description">GitHub trigger</div><span class="step-state state-neutral">TRIGGER</span>
+              </article><div class="connector"><span></span></div>
+              <article class="pipeline-step" data-check="unit">
+                <div class="step-symbol symbol-unit">⌘</div><div class="step-title">Unit tests</div><div class="step-description">JUnit 5 · 3 tests</div><span class="step-state state-pass">PASSING</span>
+              </article><div class="connector"><span></span></div>
+              <article class="pipeline-step" data-check="api">
+                <div class="step-symbol symbol-api">⌕</div><div class="step-title">API integration</div><div class="step-description">MockMvc · 4 tests</div><span class="step-state state-pass">PASSING</span>
+              </article><div class="connector"><span></span></div>
+              <article class="pipeline-step" data-check="contract">
+                <div class="step-symbol symbol-contract">⇄</div><div class="step-title">Contract test</div><div class="step-description">Pact · 1 contract</div><span class="step-state state-pass">PASSING</span>
+              </article><div class="connector"><span></span></div>
+              <article class="pipeline-step" data-check="container">
+                <div class="step-symbol symbol-container">▧</div><div class="step-title">Build image</div><div class="step-description">Docker · GHCR</div><span class="step-state state-pass">PASSING</span>
+              </article>
+            </div>
+            <div class="pipeline-footer"><span><span class="status-dot"></span> Quality gates are ready</span><a href="#learn">How CI works <span>→</span></a></div>
+          </section>
+
+          <div class="lower-grid">
+            <section id="deployment" class="panel deployment-panel">
+              <div class="panel-heading deployment-heading">
+                <div><div class="section-kicker">CONTINUOUS DELIVERY</div><h2>Canary deployment</h2><p>Release safely, one audience at a time.</p></div>
+                <span class="canary-tag"><i></i> CANARY</span>
+              </div>
+              <div class="deployment-summary">
+                <div><span class="summary-label">CURRENT RELEASE</span><strong id="release-version">v1.0.0</strong></div>
+                <div><span class="summary-label">DEPLOYMENT STATUS</span><strong id="deployment-status"><i class="status-dot status-gray"></i> Not started</strong></div>
+              </div>
+              <div class="traffic-header"><span>Traffic shifted to new version</span><strong id="traffic-label">0%</strong></div>
+              <div class="progress-track"><div id="traffic-progress" class="progress-fill"></div></div>
+              <div class="traffic-scale"><span>0%</span><span>10%</span><span>25%</span><span>50%</span><span>100%</span></div>
+              <div class="deployment-actions"><button id="start-canary" class="button button-primary button-small">Start canary <span>→</span></button><button id="promote-canary" class="button button-secondary button-small" disabled>Promote release</button><button id="rollback-canary" class="text-button" disabled>Rollback</button></div>
+              <div id="deploy-note" class="deploy-note"><span>ⓘ</span> Start at 10%, monitor health, then promote in stages.</div>
+            </section>
+
+            <section class="panel activity-panel">
+              <div class="activity-heading"><div><div class="section-kicker">RECENT ACTIVITY</div><h2>What’s happening</h2></div><span id="activity-count" class="activity-count">0 events</span></div>
+              <div id="activity-list" class="activity-list">
+                <div class="empty-activity"><span class="empty-icon">✳</span><strong>It’s quiet in here</strong><span>Run your first pipeline to see activity.</span></div>
+              </div>
+            </section>
+          </div>
+
+          <section id="learn" class="guide-banner">
+            <div class="guide-art"><span class="guide-art-ring"></span><span class="guide-art-line line-one"></span><span class="guide-art-line line-two"></span><span class="guide-art-check">✓</span></div>
+            <div class="guide-content"><div class="section-kicker">YOUR EXPERIMENT, IN PRACTICE</div><h2>From commit to confident release.</h2><p>Explore unit, integration and contract testing, then package your app and roll it out using a canary release.</p></div>
+            <div class="guide-tags"><span><i></i> CI · Test &amp; verify</span><span><i></i> CD · Package &amp; release</span></div>
+          </section>
+          <footer class="page-footer"><span>Release Lab <span>·</span> CI/CD Practical</span><span>Built for learning. Ready for shipping.</span></footer>
+        </div>
+      </main>
+      <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    </div>
+    <script src="/app.js"></script>
+  </body>
+</html>
